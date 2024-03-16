@@ -1,10 +1,10 @@
 //
 //  11724.swift
-//  Algorithm
+//  
 //
-//  Created by 서정원 on 3/8/24.
+//  Created by 서정원 on 3/15/24.
 //
-//
+
 import Foundation
 //방향 없는 그래프가 주어졌을 때, 연결 요소 (Connected Component)의 개수를 구하는 프로그램을 작성하시오. 11724 문제
 //연결 요소 : DFS
