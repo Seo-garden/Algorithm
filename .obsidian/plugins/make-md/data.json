@@ -37,14 +37,10 @@
   "deleteFileOption": "trash",
   "expandedSpaces": [
     "/",
-    "//누적 합",
     "//ㄹ",
     "//ㄹ",
-    "//DFS:BFS",
-    "//DFS:BFS",
-    "//DFS:BFS",
-    "//DFS:BFS",
-    "//Spaces/Spaces/Home"
+    "//Spaces/Spaces/Home",
+    "//DFS:BFS"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",
