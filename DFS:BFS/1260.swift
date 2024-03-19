@@ -58,13 +58,13 @@ func DFS(node: Int) {
 }
 
 func BFS(node: Int) {
-    visited[node] = true
-    queue.enque(node)
-    while !queue.isEmpty() {
-        let now = queue.deque()
-        print(now, terminator: " ")
-        for nextnode in graph[now] {
-            if !visited[nextnode] {
+    visited[node] = true        //현재 노드를 방문했다.
+    queue.enque(node)           //큐에 현재 노드를 넣는다.
+    while !queue.isEmpty() {    //큐가 비어있지 않을 동안
+        let now = queue.deque()     //큐에서 현재 노드를 꺼내고
+        print(now, terminator: " ") //현재 노드를 출력
+        for nextnode in graph[now] {    //미방문 노드를 반복
+            if !visited[nextnode] {     //다음 노드가 방문하지 않았다면
                 visited[nextnode] = true
                 queue.enque(nextnode)
             }
