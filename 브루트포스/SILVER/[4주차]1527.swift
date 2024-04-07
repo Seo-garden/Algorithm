@@ -1,8 +1,8 @@
 //
-//  1527.swift
+//  [4주차]1527.swift
 //  
 //
-//  Created by 서정원 on 4/4/24.
+//  Created by 서정원 on 4/7/24.
 //
 
 import Foundation

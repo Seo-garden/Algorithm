@@ -22,7 +22,7 @@ for _ in 0..<N {        //N * N 화단 완성
     graph.append(price)
 }
 
-func check(_ x: Int, _ y: Int) -> Bool {
+func check(_ x: Int, _ y: Int) -> Bool {        //배열밖에 있거나 방문했다면
     for i in 0..<4 {
         let nx = x + dx[i]
         let ny = y + dy[i]
@@ -33,7 +33,7 @@ func check(_ x: Int, _ y: Int) -> Bool {
     return true
 }
 
-func visitClear(_ i: Int, _ j: Int) {
+func visitClear(_ i: Int, _ j: Int) {//방문 초기화
     visited[i][j] = false
     for k in 0..<4 {
         let nx = i + dx[k]
