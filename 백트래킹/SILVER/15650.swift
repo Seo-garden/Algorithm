@@ -11,7 +11,7 @@ var visited = [Bool](repeating: false, count: N+1)
 
 func dfs(_ depth: Int){
     if depth == M {
-        if result.sorted() == result { //추가된 조건
+        if result.sorted() == result { //정렬되어있다면 출력
             print(result.map{String($0)}.joined(separator: " "))
             return
         } else {

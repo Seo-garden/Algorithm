@@ -11,7 +11,7 @@ var number = readLine()!.split(separator: " ").map({ Int($0)! })
 var sum = 0
 
 func dfs(_ depth: Int, _ start: Int){
-    if sum == S && depth >= 1 { count += 1 } //배열 요소의 합이
+if sum == S && depth >= 1 { count += 1 }       //배열 요소의 합이
     for i in start..<N {
         if !visited[i] {
             visited[i] = true

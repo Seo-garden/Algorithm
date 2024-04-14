@@ -11,17 +11,16 @@ var result = [String]()     //탐색결과
 var visited = [Bool](repeating: false, count: N+1)
 var checked = Set<String>()     //중복체크
 
-
 func dfs(_ depth: Int) {
-    for i in 0..<N {
-        if depth == M {
-            let resultString = result.joined(separator: " ")        //중복 체크하고 중복되지 않으면 출력
-            if !checked.contains(resultString) {
-                checked.insert(resultString)
-                print(resultString)
-            }
-            return
+    if depth == M {
+        let resultString = result.joined(separator: " ")        //중복 체크하고 중복되지 않으면 출력
+        if !checked.contains(resultString) {
+            checked.insert(resultString)
+            print(resultString)
         }
+        return
+    }
+    for i in 0..<N {
         if !visited[i] {
             visited[i] = true
             result.append(String(number[i]))
