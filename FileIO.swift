@@ -28,3 +28,7 @@ class FileIO {
         FileHandle.standardOutput.write(output.data(using: .utf8)!)
     }
 }
+
+let file = FileIO()
+
+let m = file.readInt()
