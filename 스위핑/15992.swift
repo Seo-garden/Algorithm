@@ -1,3 +1,5 @@
+import Foundation
+
 final class FileIO {
     private var buffer:[UInt8]
     private var index: Int = 0
@@ -47,4 +49,32 @@ final class FileIO {
 
 let fileIO = FileIO()
 
-let n = fileIO().readInt()
+
+let N = fileIO.readInt()
+var lines: [(s: Int, e: Int)] = []
+for _ in 0..<N {
+    let s = fileIO.readInt()
+    let e = fileIO.readInt()
+    lines.append((s, e))
+}
+
+lines.sort {
+    if $0.s != $1.s { return $0.s < $1.s } else { return $0.e < $1.e }
+}
+
+var left = lines[0].s, right = lines[0].e
+var result = 0
+
+for i in 0..<N {
+    if right < lines[i].s {
+        result += right - left
+        
+        left = lines[i].s
+        right = lines[i].e
+    } else {
+        right = max(right, lines[i].e)
+    }
+}
+result += right - left
+
+print(result)
