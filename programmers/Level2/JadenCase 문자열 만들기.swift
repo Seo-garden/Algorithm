@@ -1,8 +1,8 @@
-//4시 30분 리딩
-//
+//isNumber 라는 것을 알게됐는데, Character 타입에서 정수인지 아닌지를 판단할 수 있다.
+
 func solution(_ s:String) -> String {
-    var answer: String = ""
-    var isFirst: Bool = true
+    var answer = ""
+    var isFirst = true
     
     for str in s {
         if str == " " {
@@ -12,7 +12,6 @@ func solution(_ s:String) -> String {
             isFirst = false
             answer += String(str)
         } else {
-            // 문자
             if isFirst {
                 answer += String(str.uppercased())
                 isFirst = false
@@ -21,6 +20,5 @@ func solution(_ s:String) -> String {
             }
         }
     }
-    
     return answer
 }
