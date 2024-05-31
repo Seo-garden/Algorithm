@@ -1,27 +1,16 @@
 import Foundation
+//arr1 에 있는 index 를 다 더한 다음에
+//그 수를 arr2 에 곱해서 return
+func solution(_ arr1:[[Int]], _ arr2:[[Int]]) -> [[Int]] {
+     var answer = Array(repeating: Array(repeating: 0, count: arr2[0].count), count: arr1.count)
 
-func solution(_ want:[String], _ number:[Int], _ discount:[String]) -> Int {
-    var needItem = [String:Int]()
-    var needDay = 0
-    
-    for i in 0..<want.count {
-        needItem[want[i]] = number[i]
-        print(needItem)
-        needDay += number[i]
-    }
-    
-    var result = 0
-    
-    for j in 0...discount.count - needDay {
-        var martItem = needItem
-        for i in j...j + needDay - 1 {
-            martItem[discount[i]] = (martItem[discount[i]] ?? 0) - 1
-            if martItem[discount[i]] == 0 {
-                martItem.removeValue(forKey: discount[i])
+    for i in 0..<answer.count {
+        for j in 0..<answer[i].count {
+            for k in 0..<arr1[0].count {
+                answer[i][j] += arr1[i][k] * arr2[k][j]
             }
         }
-        if martItem.isEmpty { result += 1}
     }
-    return result
+    return answer
 }
-print(solution(["banana", "apple", "rice", "pork", "pot"], [3, 2, 2, 2, 1], ["chicken", "apple", "apple", "banana", "rice", "apple", "pork", "banana", "pork", "rice", "pot", "banana", "apple", "banana"]))
+print(solution([[2, 3, 2], [4, 2, 4], [3, 1, 4]], [[5, 4, 3], [2, 4, 1], [3, 1, 1]]))
