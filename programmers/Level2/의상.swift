@@ -13,11 +13,11 @@ func solution(_ clothes:[[String]]) -> Int {
             //없다면 해당 종류에 추가
             typeCount[cloth[1]] = 1
         }
-        
     }
     var count = 1
     for (_, value) in typeCount {
         count *= (value + 1)
     }
+    //-1 을 하는 이유는 아무것도 입지 않는 경우는 제외
     return count - 1
 }

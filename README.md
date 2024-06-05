@@ -18,4 +18,4 @@
 
 [프로그래머스 코딩테스트 정답률 높은 문제 순](https://school.programmers.co.kr/learn/challenges?order=acceptance_desc&levels=1%2C2&languages=swift)
 
-매일 Lv1 1문제 + Lv2 2문제씩 꾸준히 풀 것.
+
