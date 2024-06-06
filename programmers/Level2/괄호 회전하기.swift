@@ -11,12 +11,11 @@ func solution(_ s:String) -> Int {
         var stack = ""
         count -= 1
         for char in s {
-            if let last = stack.last {
-                if (last == "[" && char == "]") || (last == "{" && char == "}") || (last == "(" && char == ")") {
+            var last = stack.last
+            if (last == "[" && char == "]") || (last == "{" && char == "}") || (last == "(" && char == ")") {
                     stack.removeLast()
                     continue
                 }
-            }
             stack.append(char)
         }
         if stack.isEmpty { result += 1}

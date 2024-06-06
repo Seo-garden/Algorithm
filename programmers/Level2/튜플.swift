@@ -8,7 +8,7 @@ func solution(_ s:String) -> [Int] {
     input = input.replacingOccurrences(of: "}", with: "")
     
     var data = input.split{$0 == ","}.map{Int(String($0))!}
-    print(data)
+    
     for i in data {
         if dic[i] != nil {
             dic[i]! += 1
@@ -21,4 +21,3 @@ func solution(_ s:String) -> [Int] {
     }
     return result
 }
-print(solution("{{2},{2,1},{2,1,3},{2,1,3,4}}"))
