@@ -1,24 +1,22 @@
-import Foundation
-
-func solution(_ s:String) -> [Int] {
-    var dic : [Int:Int] = [:]
-    var result = [Int]()
+//str1, str2 배열로 만들고 for 문 돌려서 str1.count - 1
+func solution(_ str1:String, _ str2:String) -> Int {
+    var str1 = Array(str1)
+    var str2 = Array(str2)
+    var answer : Int = 0
     
-    var input = s.replacingOccurrences(of: "{", with: "")
-    input = input.replacingOccurrences(of: "}", with: "")
+    var firstchar1 = [String]()
+    var secondchar2 =
     
-    var data = input.split{$0 == ","}.map{Int(String($0))!}
-    print(data)
-    for i in data {
-        if dic[i] != nil {
-            dic[i]! += 1
-        } else {
-            dic[i] = 1
-        }
+    for i in stride(from: 0, to: str1.count, by: 2) {
+        let char = String(str1[i])
+        let secondchar = i + 1 < str1.count ? str1[i+1] : " "
+        
+        let pair = "\(char)\(secondchar)"
     }
-    for (key, _) in dic.sorted(by: {$0.value > $1.value}) {
-        result.append(key)
+    
+    for i in stride(from: 0, to: str2.count, by: 2) {
+        let char = str2[i]
+        let secondchar = i + 1 < str2.count ? str2[i+1] : " "
     }
-    return result
+    return 0
 }
-print(solution("{{2},{2,1},{2,1,3},{2,1,3,4}}"))

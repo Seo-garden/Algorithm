@@ -19,3 +19,14 @@
 [프로그래머스 코딩테스트 정답률 높은 문제 순](https://school.programmers.co.kr/learn/challenges?order=acceptance_desc&levels=1%2C2&languages=swift)
 
 
+.isNumber
+
+.filter | String(n, radix: 2)
+
+.ceil(), replacingOccurrences()
+
+.isLetter
+
+.indices
+
+
