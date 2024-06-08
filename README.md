@@ -19,14 +19,20 @@
 [프로그래머스 코딩테스트 정답률 높은 문제 순](https://school.programmers.co.kr/learn/challenges?order=acceptance_desc&levels=1%2C2&languages=swift)
 
 
-.isNumber
+.isNumber : Character 타입의 프로퍼티로, 해당 문자가 숫자인지 확인한다. -> Bool 으로 문자가 숫자일 경우 true, 아니면 false
 
-.filter | String(n, radix: 2)
+.filter{$0 % 2 == 0} : 클로저를 인수로 받아, 클로저의 조건을 만족하는 요소만 포함
 
-.ceil(), replacingOccurrences()
+.ceil() : Double or Float 타입의 값을 받아서 소수점을 올림하여 가장 가까운 정수를 반환
 
-.isLetter
+replacingOccurrences(of: with:) : 문자열에서 특정 문자열을 다른 문자열로 바꾸는 메서드로 원본 문자열을 변경하지 않고, 바뀐 새로운 문자열을 반환하는데, 이 문제를 카카오 문제에서 처음 봤다. of 에 오는 문자를 with 에 변경할 문자로 변경해준다.
 
-.indices
+.isLetter : Character 타입의 프로퍼티로, 해당 문자가 알파벳 문자인지 확인한다. 
 
+.indices : 배열, 문자열 등에서 모든 유효한 인덱스를 나타내는 프로퍼티이다.
 
+reduce() : 컬렉션의 요소들을 결합하여 단일 값으로 만드는 데 사용되는 메서드다. 
+
+let numbers = [1,2,3,4,5]
+
+let sum = numbers.reduce(0){$0 + $1} --> 15
