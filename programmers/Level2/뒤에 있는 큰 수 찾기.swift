@@ -1,16 +1,13 @@
 func solution(_ numbers: [Int]) -> [Int] {
     var result = [Int](repeating: -1, count: numbers.count)
+    var stack = [Int]()
     
     for i in 0..<numbers.count {
-        for j in i+1..<numbers.count {
-            if numbers[j] > numbers[i] {
-                result[i] = numbers[j]
-                break
-            }
+        while !stack.isEmpty && numbers[stack.last!] < numbers[i] {
+            result[stack.popLast()!] = numbers[i]
         }
+        stack.append(i)
     }
     
     return result
 }
-
-
