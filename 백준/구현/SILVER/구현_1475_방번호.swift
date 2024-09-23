@@ -18,6 +18,7 @@ for i in input {
     } else {
         arr[i] += 1
     }
+    print(arr)
 }
 print(arr.max()!)
 
