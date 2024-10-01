@@ -1,30 +1,112 @@
-let nx = readLine()!.split(separator: " ").map { Int($0)! }
-let (n, x) = (nx[0], nx[1])
-let visit = readLine()!.split(separator: " ").map { Int($0)! }
-var (left, right, sum, max, ans) = (0, x - 1, 0, 0, 1)
+import Foundation
 
-for i in 0..<n - x + 1 {
-    if i == 0 { // 처음 값
-        for j in 0..<x {
-            sum += visit[j]
-        }
-        max = sum
+final class FileIO {
+    private let buffer:[UInt8]
+    private var index: Int = 0
+
+    init(fileHandle: FileHandle = FileHandle.standardInput) {
+        
+        buffer = Array(try! fileHandle.readToEnd()!)+[UInt8(0)] // 인덱스 범위 넘어가는 것 방지
     }
-    
-    else {  // 처음 이후
-        sum = sum - visit[i - 1] + visit[i + x - 1] // 첫 번째 값 빼주고, 마지막 값 더하기
-        if sum == max {
-            ans += 1
-        } else if sum > max {
-            max = sum
-            ans = 1
+
+    @inline(__always) private func read() -> UInt8 {
+        defer { index += 1 }
+
+        return buffer[index]
+    }
+
+    @inline(__always) func readInt() -> Int {
+        var sum = 0
+        var now = read()
+        var isPositive = true
+
+        while now == 10
+                || now == 32 { now = read() } // 공백과 줄바꿈 무시
+        if now == 45 { isPositive.toggle(); now = read() } // 음수 처리
+        while now >= 48, now <= 57 {
+            sum = sum * 10 + Int(now-48)
+            now = read()
         }
+
+        return sum * (isPositive ? 1:-1)
+    }
+
+    @inline(__always) func readString() -> String {
+        var now = read()
+
+        while now == 10 || now == 32 { now = read() } // 공백과 줄바꿈 무시
+
+        let beginIndex = index-1
+
+        while now != 10,
+              now != 32,
+              now != 0 { now = read() }
+
+        return String(bytes: Array(buffer[beginIndex..<(index-1)]), encoding: .ascii)!
+    }
+
+    @inline(__always) func readByteSequenceWithoutSpaceAndLineFeed() -> [UInt8] {
+        var now = read()
+
+        while now == 10 || now == 32 { now = read() } // 공백과 줄바꿈 무시
+
+        let beginIndex = index-1
+
+        while now != 10,
+              now != 32,
+              now != 0 { now = read() }
+
+        return Array(buffer[beginIndex..<(index-1)])
     }
 }
 
-if max == 0 {
+let fileIO = FileIO()
+
+let N = fileIO.readInt()
+let X = fileIO.readInt()
+
+var visit = [Int](repeating: 0, count: N)
+
+for item in 0..<visit.count {
+    visit[item] = fileIO.readInt()
+}
+
+var arr = [Int]()
+
+var start = 0
+var end = 0
+var sum = 0
+var count = 0
+
+//for end in 0..<(N - X + 1){
+//    for i in 0..<X {
+//        sum += visit[end + i]
+//    }
+//    arr.append(sum)
+//    sum = 0
+//}
+for i in 0..<X {
+    sum += visit[i]
+}
+
+arr.append(sum)
+
+for i in X..<N {
+    sum += visit[i] - visit[i - X]
+    arr.append(sum)
+}
+
+if arr.max()! == 0 {
     print("SAD")
 } else {
-    print(max)
-    print(ans)
+    let result = arr.max()!
+    print(result)
+    
+    let count = arr.filter { $0 == result}.count
+    print(count)
 }
+
+//5 2
+//1 2 1 2 1
+//3
+//4
