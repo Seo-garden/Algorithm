@@ -75,26 +75,25 @@ var minLength = Int.max // 최소 구간의 길이를 저장할 변수
 var start = 0 // 시작 포인터
 
 // 슬라이딩 윈도우로 배열 탐색
-for end in 0..<N {
-    if doll[end] == 1 {
-        countOfOnes += 1
-    }
-    
-    // 구간 내 1이 K개 이상인 경우
-    while countOfOnes >= K {
-        minLength = min(minLength, end - start + 1) // 최소 길이 업데이트
 
-        // 시작 포인터를 오른쪽으로 이동하면서 구간을 줄임
-        if doll[start] == 1 {
-            countOfOnes -= 1
-        }
-        start += 1
+for i in 0..<N {
+    if doll[i] == 1 {
+        doll[countOfOnes] = i
+        countOfOnes += 1
     }
 }
 
-// 결과 출력
-if minLength == Int.max {
-    print("-1") // K개의 1을 포함하는 구간을 찾지 못했을 경우
+if countOfOnes < K {
+    print(-1)
 } else {
-    print(minLength) // 최소 길이 출력
+    var length = 0
+    var result = N
+    var start = 0, end = K - 1
+    while end < countOfOnes {
+        length = doll[end] - doll[start] + 1
+        result = min(result, length)
+        start += 1
+        end += 1
+    }
+    print(result)
 }
