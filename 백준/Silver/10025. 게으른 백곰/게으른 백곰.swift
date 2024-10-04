@@ -9,14 +9,14 @@ for _ in 0..<N {
 }
 
 // 최대 인덱스 값 찾기
-let maxIndex = input.map { $0.1 }.max() ?? 0
+let maxIndex = input.map { $0.1 }.max()!
 
 // 최대 크기만큼의 배열 초기화 (각 위치에서의 아이스크림 개수를 저장)
 var iceCreamArray: [Int] = Array(repeating: 0, count: maxIndex + 1)
 
 // 입력값에 따라 아이스크림 개수를 배열에 설정
-for (iceCreamCount, position) in input {
-    iceCreamArray[position] += iceCreamCount
+for (iceCount, position) in input {
+    iceCreamArray[position] += iceCount
 }
 
 // K가 maxIndex보다 클 경우, 사실상 전체 배열을 하나의 윈도우로 처리해야 합니다.
