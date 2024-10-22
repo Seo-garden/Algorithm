@@ -21,14 +21,14 @@ let whiteBoard = [["W","B","W","B","W","B","W","B"],
 let NM = readLine()!.split(separator: " ").compactMap { Int($0)! }
 let N = NM[0], M = NM[1]
 var board = [[String]]()
-var count = 65
+var count = 64
 
 for _ in 0..<N {
     board.append(readLine()!.map { String($0) })
 }
 
-for i in 0..<N - 7 {
-    for j in 0..<M - 7 {
+for i in 0...N - 8 {
+    for j in 0...M - 8 {
         var Bcount = 0
         var Wcount = 0
         
