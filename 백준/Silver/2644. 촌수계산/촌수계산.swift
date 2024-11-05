@@ -6,7 +6,7 @@ var graph = [[Int]](repeating: [], count: N+1)
 var visited = [Bool](repeating: false, count: N+1)
 var answer = -1
 
-for _ in 1...M {
+for _ in 0..<M {
     let input = readLine()!.split(separator: " ").map{ Int($0)! }
     let a = input[0], b = input[1]
     graph[a].append(b)
