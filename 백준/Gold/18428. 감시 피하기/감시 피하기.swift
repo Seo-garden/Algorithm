@@ -1,15 +1,14 @@
-let n = Int(readLine()!)! // 맵의 크기 (n x n)
+let n = Int(readLine()!)!
 var graph = Array(repeating: Array(repeating: Character(" "), count: n), count: n) // 맵 정보
-var teacherLocations = [[Int]]() // 모든 선생님 위치 좌표
-var roads = [[Int]]() // 모든 빈 복도 좌표
-let cnt = 3 // 설치해야 할 장애물 개수
-let dx = [-1, 1, 0, 0] // 이동 방향: 위, 아래, 왼쪽, 오른쪽
+var teacherLocations = [[Int]]()
+var roads = [[Int]]()
+let cnt = 0
+let dx = [-1, 1, 0, 0]
 let dy = [0, 0, -1, 1]
-var ans = "NO" // 결과값, 초기값은 "NO"
+var ans = "NO"
 
 // 맵 정보 입력
 for i in 0..<n {
-    // 공백으로 구분된 문자열을 Character 배열로 변환
     let line = readLine()!.split(separator: " ").map { $0.first! }
     for j in 0..<n {
         graph[i][j] = line[j]
@@ -55,27 +54,22 @@ func isFind() -> Bool {
 // DFS를 사용해 장애물을 설치하는 함수
 func dfs(_ index: Int, _ cnt: Int) {
     if cnt == 3 { // 장애물 3개 설치 완료 시
-        // 모든 선생님이 한 명의 학생도 감시할 수 없는 경우 "YES"
-        if !isFind() {
+        if !isFind() {      // 모든 선생님이 한 명의 학생도 감시할 수 없는 경우 "YES"
             ans = "YES"
         }
         return
     }
     
-    // 현재 위치 이후의 모든 빈 복도를 순회
-    for i in index..<roads.count {
+    for i in index..<roads.count {      // 현재 위치 이후의 모든 빈 복도를 순회
         let ni = roads[i][0]
         let nj = roads[i][1]
         
-        // 현재 위치에 장애물 설치
         graph[ni][nj] = "B"
-        // 다음 위치로 이동하며 장애물 설치 시도
         dfs(i + 1, cnt + 1)
         // 백트래킹: 설치한 장애물 제거
         graph[ni][nj] = "X"
     }
 }
 
-// DFS 시작
 dfs(0, 0)
 print(ans) // 최종 결과 출력
