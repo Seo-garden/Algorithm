@@ -1,70 +1,56 @@
-import Foundation
+let nmv = readLine()!.split(separator: " ").map { Int($0)! }
+let n = nmv[0], m = nmv[1], v = nmv[2]
 
-struct Queue<T> {
-    private var queue: [T] = []
-    
-    public var count: Int {
-        return queue.count
-    }
-    
-    public var isEmpty: Bool {
-        return queue.isEmpty
-    }
-    
-    public mutating func enqueue(_ element: T) {
-        queue.append(element)
-    }
-    
-    public mutating func dequeue() -> T? {
-        return isEmpty ? nil : queue.removeFirst()
-    }
-}
+var graph = [[Int]](repeating: [], count: n+1)
+var visited = [Bool](repeating: false, count: n+1)
 
-let input = readLine()!.split(separator: " ").map { Int($0)! }
-let N = input[0], M = input[1], V = input[2]
-var graph = [[Int]](repeating: [], count: N+1)
-var visited = [Bool](repeating: false, count: N+1)
-var queue = Queue<Int>()
 var result = ""
 
-for _ in 1...M {
-    let inputArr = readLine()!.split(separator: " ").map { Int($0)! }
-    let a = inputArr[0], b = inputArr[1]
-    graph[a].append(b)
-    graph[b].append(a)
+for _ in 1...m {
+    let input = readLine()!.split(separator: " ").map{ Int($0)! }
+    let x = input[0], y = input[1]
+    
+    graph[x].append(y)
+    graph[y].append(x)
 }
 
-for i in 1...N {
+for i in 1...n {
     graph[i].sort()
 }
 
-private func DFS(_ node: Int) {
-    visited[node] = true
-    result += "\(node) "
-    for nextnode in graph[node] {
+
+
+private func DFS(_ start: Int) {
+    visited[start] = true
+    result += "\(start) "
+    
+    for nextnode in graph[start] {
         if !visited[nextnode] {
             DFS(nextnode)
         }
     }
 }
 
-private func BFS(_ node: Int) {
-    visited[node] = true
-    
-    queue.enqueue(node)
+
+private func BFS(_ start: Int) {
+    var queue = [start]
+    visited[start] = true
+
     while !queue.isEmpty {
-        let q = queue.dequeue()!
-        print(q, terminator: " ")
-        for nextnode in graph[q] {
+        let node = queue.removeFirst()
+        result += "\(node) "
+        for nextnode in graph[node] {
             if !visited[nextnode] {
+                queue.append(nextnode)
                 visited[nextnode] = true
-                queue.enqueue(nextnode)
             }
         }
     }
 }
 
-DFS(V)
+DFS(v)
 print(result)
-visited = [Bool](repeating: false, count: N+1)
-BFS(V)
+result = ""
+visited = [Bool](repeating: false, count: n+1)
+BFS(v)
+print(result)
