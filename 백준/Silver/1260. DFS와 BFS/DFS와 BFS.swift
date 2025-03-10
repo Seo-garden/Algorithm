@@ -1,15 +1,12 @@
 let nmv = readLine()!.split(separator: " ").map { Int($0)! }
 let n = nmv[0], m = nmv[1], v = nmv[2]
-
 var graph = [[Int]](repeating: [], count: n+1)
 var visited = [Bool](repeating: false, count: n+1)
-
 var result = ""
 
 for _ in 1...m {
-    let input = readLine()!.split(separator: " ").map{ Int($0)! }
+    let input = readLine()!.split(separator: " ").map { Int($0)! }
     let x = input[0], y = input[1]
-    
     graph[x].append(y)
     graph[y].append(x)
 }
@@ -18,19 +15,15 @@ for i in 1...n {
     graph[i].sort()
 }
 
-
-
 private func DFS(_ start: Int) {
     visited[start] = true
     result += "\(start) "
-    
     for nextnode in graph[start] {
         if !visited[nextnode] {
             DFS(nextnode)
         }
     }
 }
-
 
 private func BFS(_ start: Int) {
     var queue = [start]
