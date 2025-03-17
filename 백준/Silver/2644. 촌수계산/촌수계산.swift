@@ -1,32 +1,36 @@
-let N = Int(readLine()!)!
+let n = Int(readLine()!)!
 let number = readLine()!.split(separator: " ").map { Int($0)! }
-let start = number[0], end = number[1]
-let M = Int(readLine()!)!
-var graph = [[Int]](repeating: [], count: N+1)
-var visited = [Bool](repeating: false, count: N+1)
-var answer = -1
 
-for _ in 0..<M {
-    let input = readLine()!.split(separator: " ").map{ Int($0)! }
-    let a = input[0], b = input[1]
-    graph[a].append(b)
-    graph[b].append(a)
+var graph = [[Int]](repeating: [], count: n+1)
+var visited = [Bool](repeating: false, count: n+1)
+
+var result: Int = -1
+
+let start = number[0], end = number[1]
+let m = Int(readLine()!)!
+
+for _ in 1...m {
+    let input = readLine()!.split(separator: " ").map { Int($0)! }
+    let x = input[0], y = input[1]
+    graph[x].append(y)
+    graph[y].append(x)
 }
 
-private func DFS(_ node: Int, _ depth: Int) {
-    visited[node] = true
+
+
+private func DFS(_ start: Int, _ depth: Int) {
+    visited[start] = true
     
-    if node == end {
-        answer = depth
-        return
+    if start == end {
+        result = depth
     }
     
-    for nextnode in graph[node] {
+    for nextnode in graph[start] {
         if !visited[nextnode] {
-            visited[nextnode] = true
-            DFS(nextnode, depth + 1)
+            DFS(nextnode, depth+1)
         }
     }
 }
+
 DFS(start, 0)
-print(answer)
+print(result)
