@@ -1,43 +1,46 @@
-import Foundation
+let t = Int(readLine()!)!
 
-var t = Int(readLine()!)!
+let dx = [0, 0, -1, 1]
+let dy = [1, -1, 0, 0]
 
-var count = 0
 for _ in 0..<t {
-    let input = readLine()!.split(separator: " ").map({ Int($0)!})
-    let m = input[0], n = input[1], k = input[2]
+    let mnk = readLine()!.split(separator: " ").map { Int($0)! }
+    let m = mnk[0], n = mnk[1], k = mnk[2]
+    var map = Array(repeating: Array(repeating: 0, count: m), count: n)
+    var visited = Array(repeating: Array(repeating: false, count: m), count: n)
+    for _ in 0..<k {
+        let input = readLine()!.split(separator: " ").map { Int($0)! }
+
+        let x = input[0]
+        let y = input[1]
+        map[y][x] = 1
+    }
     
-    var graph = [[Int]](repeating: [Int](repeating: 0, count: n), count: m)
-
-    for _ in 1...k {
-        let placeXY = readLine()!.split(separator: " ").map({ Int($0)!})
-        let x = placeXY[0]
-        let y = placeXY[1]
-        graph[x][y] = 1
-    }
-
-    // 입력값은 다 받았고
-    // DFS or BFS 돌려서 배추흰주렁이를 놓을 공간을 찾으면 된다.
-
-    func dfs(_ x: Int, _ y: Int) {
-        if x < 0 || y < 0 || x >= m || y >= n { return }
-        if graph[x][y] == 1 {
-            graph[x][y] = 0     //방문처리를 하기 위함
-            dfs(x-1, y)         //좌
-            dfs(x+1, y)         //우
-            dfs(x, y-1)         //상
-            dfs(x, y+1)         //하
-        }
-    }
-    for i in 0..<m {
-        for j in 0..<n {
-            if graph[i][j] == 1 {
-                dfs(i,j)
-                count += 1
+    func DFS(_ x: Int, _ y: Int) {
+        visited[x][y] = true
+        
+        for i in 0..<4 {
+            let nx = dx[i] + x
+            let ny = dy[i] + y
+            
+            if nx >= 0 && nx < n && ny >= 0 && ny < m {
+                if !visited[nx][ny] && map[nx][ny] == 1 {
+                    DFS(nx, ny)
+                }
             }
         }
     }
-    dfs(m, n)
-    print(count)
-    count = 0
+    
+    var answer = 0
+    
+    for i in 0..<n {
+        for j in 0..<m {
+            if !visited[i][j] && map[i][j] == 1 {
+                answer += 1
+                DFS(i, j)
+            }
+        }
+    }
+    
+    print(answer)
 }
