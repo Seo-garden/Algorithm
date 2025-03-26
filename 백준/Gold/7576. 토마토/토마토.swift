@@ -1,42 +1,53 @@
 let mn = readLine()!.split(separator: " ").map { Int($0)! }
 let m = mn[0], n = mn[1]
-var map = [[Int]]()
+var tomato = [[Int]]()
+var count = 0
 
-let dx = [1, 0, -1, 0]
-let dy = [0, 1, 0, -1]
-
+var queue = [(Int, Int)]()
 
 for _ in 0..<n {
-    map.append(readLine()!.split(separator: " ").map { Int($0)! })
+    let input = readLine()!.split(separator: " ").map { Int($0)! }
+    tomato.append(input)
 }
 
-var queue: [(Int, Int)] = []
+let dx = [0, 0, -1, 1]
+let dy = [1, -1, 0, 0]
+
+var visited = Array(repeating: Array(repeating: 0, count: m), count: n)
 
 for y in 0..<n {
     for x in 0..<m {
-        if map[y][x] == 1 {      //익은 토마토
+        if tomato[y][x] == 1 {
             queue.append((y,x))
         }
     }
 }
 
-
 var index = 0
 
-while index < queue.count {
-    let y = queue[index].0
-    let x = queue[index].1
-    
-    for i in 0..<4 {
-        let ny = y + dy[i]
-        let nx = x + dx[i]
-        // 범위 내에 있으면서, 방문하지 않고, 익지 않은 토마토일 경우
-        if 0..<m ~= nx && 0..<n ~= ny && map[ny][nx] == 0 {
-            map[ny][nx] = map[y][x] + 1
-            queue.append((ny, nx))
+private func BFS() {
+    while index < queue.count {
+        let y = queue[index].0
+        let x = queue[index].1
+        
+        index += 1
+        
+        for i in 0..<4 {
+            let nx = dx[i] + x
+            let ny = dy[i] + y
+            
+            if nx >= 0 && nx < m && ny >= 0 && ny < n && tomato[ny][nx] == 0 {
+                tomato[ny][nx] = tomato[y][x] + 1   //
+                queue.append((ny, nx))              //익은 토마토
+            }
         }
     }
-    index += 1
 }
 
-print(map.flatMap { $0 }.contains(0) ? -1 : map.flatMap { $0 }.max()! - 1)
+BFS()
+
+if tomato.flatMap({ $0 }).contains(0) {
+    print(-1)
+} else {
+    print(tomato.flatMap { $0 }.max()! - 1)
+}
