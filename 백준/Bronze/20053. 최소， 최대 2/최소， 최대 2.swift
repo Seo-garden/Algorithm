@@ -60,7 +60,6 @@ final class FileIO {
 let fIO = FileIO()
 let t = fIO.readInt()
 var arr = [Int]()
-var result = [Int]()
 
 for _ in 0..<t {
     let n = fIO.readInt()
@@ -69,12 +68,6 @@ for _ in 0..<t {
         arr.append(fIO.readInt())
     }
     
-    for i in arr.sorted() {
-        result.append(i)
-    }
-    
-    print(result.min()!, result.max()!)
+    print(arr.min()!, arr.max()!)
     arr = []
-    result = []
-    
 }
