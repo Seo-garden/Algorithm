@@ -1,24 +1,40 @@
-let nm = readLine()!.split(separator: " ").map{Int(String($0))!}
-let (n, m) = (nm[0], nm[1])
+let nm = readLine()!.split(separator: " ").map { Int($0)! }
+let n = nm[0], m = nm[1]
 
-var arr = [[Int]]()
+var map = [[Int]]()
+var visited = Array(repeating: Array(repeating: false, count: m), count: n)
+
+let dx = [0, 0, -1, 1]
+let dy = [-1, 1, 0, 0]
+
 for _ in 0..<n {
-    arr.append(readLine()!.map{Int(String($0))!})
+    let row = Array(readLine()!).map { Int(String($0))! }
+    map.append(row)
 }
-var queue = [(0, 0)]
-let (dx, dy) = ([-1, 1, 0, 0], [0,0,1,-1])
 
-while !queue.isEmpty {
-    let (x, y) = queue.removeFirst()
-    for i in 0..<4 {
-        let nx = x + dx[i], ny = y + dy[i]
-        if nx < 0 || ny < 0 || nx >= n || ny >= m {continue}
-        if arr[nx][ny] == 0 {continue}
-        if arr[nx][ny] == 1 {
-            arr[nx][ny] = arr[x][y] + 1
-            queue.append((nx, ny))
+func BFS(_ x: Int, _ y: Int) {
+    var queue: [[Int]] = [[x, y]]
+    visited[x][y] = true
+
+    while !queue.isEmpty {
+        let current = queue.removeFirst()
+        let cx = current[0]
+        let cy = current[1]
+
+        for i in 0..<4 {
+            let nx = cx + dx[i]
+            let ny = cy + dy[i]
+
+            if nx >= 0 && nx < n && ny >= 0 && ny < m {
+                if map[nx][ny] == 1 && !visited[nx][ny] {
+                    visited[nx][ny] = true
+                    map[nx][ny] = map[cx][cy] + 1
+                    queue.append([nx, ny])
+                }
             }
-            
         }
+    }
 }
-print(arr[n - 1][m - 1])
+
+BFS(0, 0)
+print(map[n-1][m-1])
