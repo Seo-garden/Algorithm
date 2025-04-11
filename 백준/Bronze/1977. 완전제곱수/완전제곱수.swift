@@ -1,21 +1,20 @@
+import Foundation
+
 let m = Int(readLine()!)!
 let n = Int(readLine()!)!
-
-var sum = 0
 var arr = [Int]()
 
-for i in 1...n {
-    for j in m...n {
-        if j == i * i {
-            sum += j
-            arr.append(j)
-        }
-    }
-}
+let start = Int(ceil(sqrt(Double(m))))
+let end = Int(floor(sqrt(Double(n))))
 
-if sum == 0 {
+var sum = 0
+
+if start > end {
     print(-1)
 } else {
+    for n in start...end {
+        sum += n * n
+    }
     print(sum)
-    print(arr.min()!)
+    print(start*start)
 }
