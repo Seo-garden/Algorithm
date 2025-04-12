@@ -1,21 +1,21 @@
-import Foundation
-
 let a = readLine()!.split(separator: " ").map { Int($0)! }
-let b = readLine()!.split(separator: " ").map { Int($0)! }
-
 let aAttack = a[0], aHP = a[1]
+var aHP1 = aHP
+
+let b = readLine()!.split(separator: " ").map { Int($0)! }
 let bAttack = b[0], bHP = b[1]
+var bHP1 = bHP
 
-// 플레이어 A가 B를 쓰러뜨리기 위한 공격 횟수
-let aTurns = (bHP + aAttack - 1) / aAttack
+while true {
+    aHP1 -= bAttack
+    bHP1 -= aAttack
+    if aHP1 <= 0 || bHP1 <= 0 { break }
+}
 
-// 플레이어 B가 A를 쓰러뜨리기 위한 공격 횟수
-let bTurns = (aHP + bAttack - 1) / bAttack
-
-if aTurns < bTurns {
-    print("PLAYER A")
-} else if aTurns > bTurns {
-    print("PLAYER B")
-} else {
+if aHP1 <= 0 && bHP1 <= 0 {
     print("DRAW")
+} else if bHP1 <= 0 {
+    print("PLAYER A")
+} else {
+    print("PLAYER B")
 }
