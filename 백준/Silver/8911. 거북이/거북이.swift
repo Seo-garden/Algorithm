@@ -7,7 +7,7 @@ let dy = [0, -1, 0, 1]
 for _ in 0..<t {
     var x = 0
     var y = 0
-    var dir = 0
+    var dir = 1
     var path = [(x: Int, y: Int)]()
     path.append((x,y))
     
